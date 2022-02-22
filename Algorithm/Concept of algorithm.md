@@ -90,3 +90,39 @@
                  1 6 6 5
 ```
 > 대충 이런 식이다..
+```
+#include <iostream>
+
+
+using namespace std;
+int alarusse(int first, int second) {
+    int third = 0;
+    // 더한 값을 기록할 변수 (세번째 칸)
+
+    while (first > 0) {
+        // 만약 첫번째 칸의 숫자가 0보다 크다면 반복
+
+        if (first % 2 == 1) {
+            // 첫번째 칸의 숫자가 홀수라면
+
+            third += second;
+            // 세번째 칸에 수를 더함
+        }
+        first = first >> 1; // 2로 나누기
+        second = second << 1; // 2를 곱하기
+    }
+    // 첫번째 숫자가 1을 지나 
+    // 0까지 떨어지면 알고리즘 종료
+
+    return third;
+}
+
+
+
+int main()
+{
+    int result = alarusse(45, 37);
+
+    cout << result << endl;//출력 : 1665
+}
+```
