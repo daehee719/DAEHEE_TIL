@@ -59,7 +59,48 @@ int main()
 ### 2-1. 다차원배열의 구조
 * 다차원 배열의 정의
  * 인덱스 연산자를 차원 수 만큼 쓴다.
+* array[3][3]에서
+ * array[0],array[1],array[2]는 각각 세개짜리 정수배열을 가리킴.
+ * sizeof(array[0]) == 12, sizeof(array[0][0]) == 4
+ ```
+ int main()
+{
+	int array[3][3] =
+	{
+		{1,2,3},  
+		{4,5,6},
+		{7,8,9}
+	};
+}
+ ```
 ### 2-2. 다차원배열의 사용법
+```
+int average(int m[][3])
+{
+	int i, j;
+	int sum = 0;
+	for ( i = 0; i < 3; i++)
+	{
+		for ( j = 0; j < 3; j++)
+		{
+			sum += m[i][j];
+		}
+	}
+	return sum / (3 * 3);
+}
+
+
+int main()
+{
+	int array[3][3] = {
+		{1,2,3},
+		{4,5,6},
+		{7,8,9}
+	};
+	int averageRes = average(array);
+	cout << averageRes << endl;
+}
+```
 
 
 ## 3. 미로탐색
