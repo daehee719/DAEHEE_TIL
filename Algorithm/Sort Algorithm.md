@@ -23,3 +23,4 @@
 ![Insertion Sort](https://user-images.githubusercontent.com/81199906/157043992-e937130b-2bc6-462f-a6c8-b2f0d4f24f05.png)
 * 값을 비교해 가면서 가르키는 숫자를 정렬이 된 배열 부분에 삽입을 한다.
 #### 4. Merge Sort(합병 정렬)
+![Merge Sort](https://user-images.githubusercontent.com/81199906/157044835-ff6a075a-993b-4326-8815-ed5ad0fef724.png)
