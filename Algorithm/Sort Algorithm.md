@@ -17,3 +17,5 @@
 ![Selection Sort](https://user-images.githubusercontent.com/81199906/157038971-e8f9be66-6f8f-4e58-81d2-e5e2d04125fc.png)
 * 가장 큰 값을 맨 마지막 값과 자리를 바꾸는 과정을 반복하여 정렬을 한다.
 #### 2. Bubble Sort(버블 정렬)
+![Bubble Sort](https://user-images.githubusercontent.com/81199906/157043489-0af8dc63-6d05-4967-bb47-a838f6b70844.png)
+* 처음값과 그 다음값을 비교하며 정렬이 완료 될 때까지 계속 돈다.
