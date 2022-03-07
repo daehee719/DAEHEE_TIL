@@ -11,3 +11,9 @@
 * Heap sort - fast
 
 * Radix sort - O(N)
+
+
+#### 1. Selection Sort(선택 정렬)
+![Selection Sort](https://user-images.githubusercontent.com/81199906/157038971-e8f9be66-6f8f-4e58-81d2-e5e2d04125fc.png)
+* 가장 큰 값을 맨 마지막 값과 자리를 바꾸는 과정을 반복하여 정렬을 한다.
+#### 2. Bubble Sort(버블 정렬)
