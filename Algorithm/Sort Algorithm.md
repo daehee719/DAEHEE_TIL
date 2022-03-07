@@ -19,3 +19,7 @@
 #### 2. Bubble Sort(버블 정렬)
 ![Bubble Sort](https://user-images.githubusercontent.com/81199906/157043489-0af8dc63-6d05-4967-bb47-a838f6b70844.png)
 * 처음값과 그 다음값을 비교하며 정렬이 완료 될 때까지 계속 돈다.
+#### 3. Insertion Sort(삽입 정렬)
+![Insertion Sort](https://user-images.githubusercontent.com/81199906/157043992-e937130b-2bc6-462f-a6c8-b2f0d4f24f05.png)
+* 값을 비교해 가면서 가르키는 숫자를 정렬이 된 배열 부분에 삽입을 한다.
+#### 4. Merge Sort(합병 정렬)
