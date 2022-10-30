@@ -1,0 +1,160 @@
+### 1.1 다형성과 Virtual
+```cpp
+#include <iostream>
+using namespace std;
+
+class Parent{
+public:
+    void print() {
+        cout << "이곳은 Parent입니다." << endl;
+    }
+};
+
+class Child : public Parent{
+public:
+    void print() {
+        cout << "이곳은 Child입니다." << endl;
+    }
+};
+
+void main() {
+    Parent* p = new Parent;
+    Child* c = new Child;
+    
+    p->print();
+    p = c;
+    p->print();
+}
+```
+우린 앞서 정적/동적 바인딩을 배웠다.
+
+정적바인딩은 컴파일때 실행할 것이 정해지는 것이고,
+동적바인딩은 런타임때 실행할 것이 정해진다는 것을 이제 알았다.
+
+근데 이게 위의 코드랑 무슨 상관일까?
+
+그것을 알기 위해선 virtual을 알아야 한다.
+
+### virtual
+<img width="439" alt="스크린샷 2022-10-31 00 19 48" src="https://user-images.githubusercontent.com/81199906/198886651-9c2b5be2-6c19-491b-8c25-44dbef41e57e.png">
+"가상의" 라는 뜻을 갖고 있다.
+
+
+```cpp
+void main() {
+    Parent* p = new Parent;
+    Child* c = new Child;
+    
+    p->print();
+    p = c;
+    p->print();
+}
+```
+p = c;로 복사를 하고 
+print()를 했을 때 우리의 기대와 달리 부모 클래스의 print()가 실행이 되었다.
+
+이것은 c++의 특성때문이다.
+
+c++은 형변환을 해도 원래 자료형의 것을 사용하는 특성이 있다.
+
+그리고 위의 작업은 "정적바인딩"으로 실행이 된다.
+이미 p의 함수의 주소는 정해져 있다.
+
+그럼 우린 위의 작업을 "동적바인딩"으로 실행을 해야
+p의 함수 주소를 동적으로 바꿀수 있겠지?
+
+이때 virtual을 쓰는 것이다.
+virtual을 쓰는 순간 c++의 다형성을 사용하고 있는 것이다.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Parent{
+public:
+    virtual void print() {
+        cout << "이곳은 Parent입니다." << endl;
+    }
+};
+
+class Child : public Parent{
+public:
+    virtual void print() {
+        cout << "이곳은 Child입니다." << endl;
+    }
+};
+
+void main() {
+    Parent* p = new Parent;
+    Child* c = new Child;
+    
+    p->print();
+    p = c;
+    p->print();
+}
+```
+<img width="671" alt="스크린샷 2022-10-31 00 37 37" src="https://user-images.githubusercontent.com/81199906/198887539-e12260a6-4528-4524-b197-ef13f1807751.png">
+그럼 우리는 우리가 기대하는 작업을 수행할 수 있게 된다.
+
+사실 virtual 클래스는 가상함수 테이블(vftable)을 갖고 있다.
+
+```cpp
+class Parent {
+ public:
+  virtual void func1();
+  virtual void func2();
+};
+class Child : public Parent {
+ public:
+  virtual void func1();
+  void func3();
+};
+```
+
+![image](https://user-images.githubusercontent.com/81199906/198887782-808759e6-db79-4075-9980-af8c97c85701.png)
+
+가상함수가 있는 클래스는 가상함수 테이블이 있다.
+
+자식 클래스에서 재정의 된 가상함수는 
+부모 클래스와 자식 클래스의 주소가 다르고
+
+재정의가 안된 가상함수는
+부모 클래스와 자식 클래스의 주소가 같다.
+
+이때문에 "virtual"을 사용하는 것은 "동적 바인딩"이라는 것이다.
+함수의 주소가 어떻게 지정 되는지 런타임시에 바뀐다.
+
+![[Pasted image 20221031004822.png]]
+그럼 이걸 봐보자.
+
+벌써 머리가 아프다 ㅋㅋ;
+여기서 발생할 수 있는 문제는 무엇일까?
+
+![image](https://user-images.githubusercontent.com/81199906/198888170-211277db-a7e1-47c0-b89d-04d3e6058ce8.png)
+우리는 분명 1번 그림의 구조를 생각했지만,
+사실 2번 그림의 구조로 설계가 된다.
+
+2번 그림은 A가 2개가 된다.
+
+그럼 C클래스에서 A에 접근하고 싶을 때 어느 A에 접근할지 컴퓨터는 모른다.
+
+그럼 어떻게 해결해야 할까?
+
+virtual을 쓰면 된다.
+
+```cpp
+class A
+{};
+class B1 : virtual public A
+{};
+class B2 : virtual public A
+{};
+class C : public B1, public B2
+```
+이렇게 하면 우리가 원하는 1번 그림처럼 설계가 된다.
+
+
+만약 누군가 "하! 난 다형성을 알아!"라고 할때
+virtual 아냐고 했을때
+"아니?"
+라고 하면 싸대기 갈기면 된다.
